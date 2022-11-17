@@ -1,0 +1,23 @@
+[
+    {
+        "recipeName": "Noodles",
+        "recipeCategory": "Pasta",
+        "recipeDescription": "This is a pasta dish",
+        "recipeAuthor": "charlie",
+        "recipeIngredients": "ingredients list"
+    },
+    {
+        "recipeName": "Chicken",
+        "recipeCategory": "Meat",
+        "recipeDescription": "This is a chicken dish",
+        "recipeAuthor": "charlie",
+        "recipeIngredients": "ingredients list"
+    },
+    {
+        "recipeName": "Meatloaf",
+        "recipeCategory": "Meat",
+        "recipeDescription": "This is a meatloaf dish",
+        "recipeAuthor": "charlie",
+        "recipeIngredients": "ingredients list"
+    }
+]
