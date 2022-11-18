@@ -1,9 +1,7 @@
 import React from 'react';
-function App() {
-  return (
-    <div> Helo
-    </div>
-  );
-}
+import AppContainer from './components/appContainer';
+
+const App = () => <AppContainer />;
+
 
 export default App;
