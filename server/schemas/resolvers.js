@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Recipe = require('../models/recipe');
+const Comment = require('../models/comment');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 
@@ -14,7 +15,7 @@ const resolvers = {
         },
         me: async (parent, args, context) => {
             if (context.user) {
-              return User.findOne({ _id: context.user._id }).populate('thoughts');
+              return User.findOne({ _id: context.user._id }).populate('recipes');
             }
             throw new AuthenticationError('You need to be logged in!');
           },
@@ -68,26 +69,25 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in');
         },
-        addComment: async (parent, { recipeId, commentText }, context) => {
-            if (context.user) {
+        addComment: async (parent, { recipeId, commentText, commentAuthor }, context) => {
+            // if (context.user) {
                 const comment = await Comment.create({
-                    commentText,
-                    commentAuthor: context.user.username,
+                    commentText: commentText,
+                    commentAuthor: commentAuthor,
+                    // commentAuthor: context.user.username,
+                    //remember to remove commentAuthor from typedefs too
                 });
-                await Recipe.findOneAndUpdate(
+                const recipe = await Recipe.findOneAndUpdate(
                     {_id: recipeId},
-                    {
-                        $addToSet: {
-                            comments: { comments: comment._id},
-                        },
-                    },
+                    { $addToSet: {comments: comment._id}},
                     {
                         new: true,
                         runValidators: true,
-                    }
+                    }   
                 );
-            }
-            throw new AuthenticationError("You need to be logged in");
+            // }
+            // throw new AuthenticationError("You need to be logged in");
+            return recipe;
         },
     }
 };
