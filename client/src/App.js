@@ -1,14 +1,6 @@
-
-
 import React from "react";
-import Login from "./pages/Login";
-function App() {
-  return (
-    <div>
-      <div>Hello</div>
-      <Login/>
-    </div>
-  );
-}
+import AppContainer from "./components/appContainer";
+
+const App = () => <AppContainer />;
 
 export default App;
