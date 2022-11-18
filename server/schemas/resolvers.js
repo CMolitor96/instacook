@@ -20,10 +20,10 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
           },
         recipes: async () => {
-            return Recipe.find();
+            return Recipe.find().populate('comments');
         },
         recipe: async (parent, { recipeName }) => {
-            return Recipe.findOne({recipeName});
+            return Recipe.findOne({recipeName}).populate('comments');
         },
     },
 
@@ -50,33 +50,37 @@ const resolvers = {
       
             return { token, user };
         },
-        addRecipe: async (parent, { recipeName, recipeCategory, recipeDescription, recipeIngredients }, context) => {
+        addRecipe: async (parent, { recipeName, recipeCategory, recipeDescription, recipeIngredients, recipeImages }, context) => {
             if (context.user) {
                 const recipe = await Recipe.create({
-                    recipeName, 
-                    recipeCategory,
-                    recipeDescription,
+                    recipeName: recipeName, 
+                    recipeCategory: recipeCategory,
+                    recipeDescription: recipeDescription,
                     recipeAuthor: context.user.username,
-                    recipeIngredients
+                    //recipeAuthor: recipeAuthor
+                    recipeIngredients: recipeIngredients,
+                    recipeImages: recipeImages
                 });
 
-                await User.findOneAndUpdate(
+               const user = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    { $addToSet: { recipes: recipe._id}}
+                    { $addToSet: { recipes: recipe._id}},
+                    {new: true}
                 );
 
-                return recipe;
+                return user.populate('recipes');
             }
             throw new AuthenticationError('You need to be logged in');
         },
         addComment: async (parent, { recipeId, commentText, commentAuthor }, context) => {
             // if (context.user) {
-                const comment = await Comment.create({
-                    commentText: commentText,
+                const comment = await Comment.create(
+                    {commentText: commentText,
                     commentAuthor: commentAuthor,
+                    }
                     // commentAuthor: context.user.username,
                     //remember to remove commentAuthor from typedefs too
-                });
+                );
                 const recipe = await Recipe.findOneAndUpdate(
                     {_id: recipeId},
                     { $addToSet: {comments: comment._id}},
@@ -87,7 +91,7 @@ const resolvers = {
                 );
             // }
             // throw new AuthenticationError("You need to be logged in");
-            return recipe;
+            return recipe.populate('comments');
         },
     }
 };
