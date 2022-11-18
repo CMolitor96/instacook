@@ -22,7 +22,7 @@ const resolvers = {
             return Recipe.find();
         },
         recipe: async (parent, { recipeName }) => {
-            return Recipe.findOne({recipeName}).populate('comments');
+            return Recipe.findOne({recipeName});
         },
     },
 

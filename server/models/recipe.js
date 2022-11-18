@@ -40,12 +40,12 @@ const recipeSchema = new Schema({
             contentType: String,
         }
     ],
-    // comments: [
-    //     {
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Comment',
-    //     }
-    // ],
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment',
+        }
+    ],
 });
 
 const Recipe = model('Recipe', recipeSchema);
