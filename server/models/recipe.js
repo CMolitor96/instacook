@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const getDate = require('../utils/dateFormat');
 
 const recipeSchema = new Schema({
     recipeName: {
@@ -33,6 +34,7 @@ const recipeSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+        get: (timestamp) => getDate(timestamp),
     },
     recipeImages: [
         {
