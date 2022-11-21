@@ -9,7 +9,7 @@ import IndividualRecipe from './pages/individualRecipe';
 import AddRecipe from './pages/addRecipe';
 
 export default function AppContainer() {
-  const [currentPage, setCurrentPage] = useState('Login');
+  const [currentPage, setCurrentPage] = useState('AddRecipe');
 
   const renderPage = () => {
     switch (currentPage) {
