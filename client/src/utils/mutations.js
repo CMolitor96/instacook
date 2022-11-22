@@ -1,22 +1,57 @@
 import { gql } from '@apollo/client';
 
-export const ADD_RECIPE = gql`
-    mutation addRecipe($recipeName: String!, $recipeCategory: String!, $recipeDescription: String!, $recipeIngredients: String!, $recipeImages: String) {
-        addRecipe(recipeName: $recipeName, recipeCategory: $recipeCategory, recipeDescription: $recipeDescription, recipeIngredients: $recipeIngredients, recipeImages: $recipeImages) {
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
         _id
-        recipeName
-        recipeCategory
-        recipeDescription
-        recipeAuthor
-        recipeIngredients
-        recipeImages
-        createdAt
-        comments {
-            _id
-            commentAuthor
-            commentText
-            createdAt
-        }
-        }
+        username
+      }
     }
+  }
+`;
+
+export const ADD_USER = gql`
+mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const ADD_RECIPE = gql`
+mutation addRecipe($recipeName: String!, $recipeCategory: String!, $recipeDescription: String!, $recipeIngredients: String!, $recipeImages: String) {
+    addRecipe(recipeName: $recipeName, recipeCategory: $recipeCategory, recipeDescription: $recipeDescription, recipeIngredients: $recipeIngredients, recipeImages: $recipeImages) {
+      _id
+      createdAt
+      recipeAuthor
+      recipeCategory
+      recipeDescription
+      recipeImages
+      recipeIngredients
+      recipeName
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+mutation addComment($recipeId: ID!, $commentText: String!) {
+    addComment(recipeId: $recipeId, commentText: $commentText) {
+      recipeName
+      recipeAuthor
+      createdAt
+      _id
+      comments {
+        createdAt
+        commentText
+        commentAuthor
+        _id
+      }
+    }
+  }
 `;
