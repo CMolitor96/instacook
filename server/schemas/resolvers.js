@@ -57,7 +57,6 @@ const resolvers = {
                     recipeCategory: recipeCategory,
                     recipeDescription: recipeDescription,
                     recipeAuthor: context.user.username,
-                    //recipeAuthor: recipeAuthor
                     recipeIngredients: recipeIngredients,
                     recipeImages: recipeImages
                 });
@@ -68,15 +67,15 @@ const resolvers = {
                     {new: true}
                 );
 
-                return user.populate('recipes');
+                return recipe;
             }
             throw new AuthenticationError('You need to be logged in');
         },
-        addComment: async (parent, { recipeId, commentText, commentAuthor }, context) => {
-            // if (context.user) {
+        addComment: async (parent, { recipeId, commentText }, context) => {
+            if (context.user) {
                 const comment = await Comment.create(
                     {commentText: commentText,
-                    commentAuthor: commentAuthor,
+                    commentAuthor: context.user.username
                     }
                     // commentAuthor: context.user.username,
                     //remember to remove commentAuthor from typedefs too
@@ -89,9 +88,9 @@ const resolvers = {
                         runValidators: true,
                     }   
                 );
-            // }
-            // throw new AuthenticationError("You need to be logged in");
-            return recipe.populate('comments');
+                return recipe.populate('comments');
+            }
+            throw new AuthenticationError("You need to be logged in");  
         },
     }
 };
