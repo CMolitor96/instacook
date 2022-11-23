@@ -1,5 +1,14 @@
 import React from "react";
-import AppContainer from "./components/appContainer";
+import { useState } from "react";
+import NavBar from "./components/navBar";
+import Footer from "./components/footer";
+import Signup from "./components/pages/signup";
+import Login from "./components/pages/login";
+import Homepage from "./components/pages/homepage";
+import UserProfile from "./components/pages/userProfile";
+import IndividualRecipe from "./components/pages/individualRecipe";
+import AddRecipe from "./components/pages/addRecipe";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
     ApolloClient,
     InMemoryCache,
@@ -7,6 +16,7 @@ import {
     createHttpLink,
   } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+
 
 const httpLink = createHttpLink({
     uri: '/graphql',
@@ -31,10 +41,31 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-const App = () => (
+function App(){
+    const [currentPage, setCurrentPage] = useState("Homepage");
+
+    const handlePageChange = (page) => setCurrentPage(page);
+    return(
     <ApolloProvider client={client}>
-        <AppContainer />
-    </ApolloProvider>
-);
+       <Router>
+      <div>
+        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/" element={<Homepage />} />
+          <Route exact path="/userprofile" element={<UserProfile />} />
+          <Route exact path="/recipe:recipeId" element={<IndividualRecipe />} />
+          <Route exact path="/addrecipe" element={<AddRecipe />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
+    </Router>
+    </ApolloProvider>)
+
+    };
 
 export default App;
