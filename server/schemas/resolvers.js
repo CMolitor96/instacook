@@ -26,6 +26,10 @@ const resolvers = {
             let recipes = await Recipe.find().populate('comments');
             return recipes;
         },
+        recipe: async (parent, { _id }, context) => {
+            let recipe = await Recipe.findById(_id).populate('comments');
+            return recipe;
+        },
         recipeCategory: async (parent, { recipeCategory }, context ) => {
             let filteredRecipes = await Recipe.find({recipeCategory: recipeCategory}).populate('comments');
             return filteredRecipes;

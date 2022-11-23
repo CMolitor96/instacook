@@ -122,3 +122,25 @@ query recipeCategory($recipeCategory: String!) {
   }
 }
 `;
+
+export const individualRecipe = gql`
+query individualRecipe($id: ID!) {
+  recipe(_id: $id) {
+    _id
+    recipeName
+    recipeCategory
+    recipeAuthor
+    createdAt
+    recipeDescription
+    recipeImages
+    recipeIngredients
+    recipeInstructions
+    comments {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+    }
+  }
+}
+`;

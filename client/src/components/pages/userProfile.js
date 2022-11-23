@@ -4,6 +4,8 @@ import { ME } from '../../utils/queries';
 import { REMOVE_RECIPE } from '../../utils/mutations';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
+
 
 const styles = {
   page: {
@@ -65,7 +67,8 @@ export default function UserProfile() {
                 <Card.Text>
                   {recipe.recipeDescription}
                 </Card.Text>
-                <Button variant="primary">Go To Recipe</Button>
+                {/* <Button variant="primary">Go To Recipe</Button> */}
+                <Link className="btn btn-primary" to={`/recipe/${recipe._id}`}>Go To Recipe</Link>
                 <Card.Text>Comments: {recipe.comments.length}</Card.Text>
                 <Card.Text>Created At: {recipe.createdAt}</Card.Text>
                 <Button variant="danger" id={recipe._id} onClick={handleDelete}>Delete this Recipe</Button>
