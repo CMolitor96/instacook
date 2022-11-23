@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
+import authService from "../../utils/auth"
 import cookies from '../Images/chocChunkCook.jpeg';
 import taco from '../Images/bestTacos.jpeg';
 import spaghetti from '../Images/spaghetti.jpeg';
+import { redirect } from 'react-router-dom';
 
 const styles = {
   page: {
@@ -47,7 +48,7 @@ const styles = {
 
 export default function Homepage() {
   const categoryArray = [
-    {
+    { 
       id: 1,
       category: 'Italian',
       link: 'link/italian'
@@ -86,15 +87,20 @@ export default function Homepage() {
       link: 'cookies/link'
     }
   ]
+
+  const loggedIn = authService.loggedIn()
+ if (!loggedIn) {
+  console.log('you are not logged in. redirecting...')
+  redirect("/login")};
+
   return (
     <div style={styles.page}>
-
-      <aside style={styles.aside}>
+ {!loggedIn ? <p>Not logged in</p>: (<> <aside style={styles.aside}>
         <h3>Filter</h3>
         <ul style={styles.asideItems}>
           {categoryArray.map((item) => {
             return (
-              <li>
+              <li key={item.id}>
                 <a
                   target='_blank'
                   href={item.link}
@@ -109,9 +115,9 @@ export default function Homepage() {
 
       <div>
         <h1 style={styles.pageTitle}>Today's Top Recipes</h1>
-        {recipeArray.map((recipe) => {
+        {recipeArray.map((recipe, index) => {
           return (
-            <Card style={styles.cardSpacing}>
+            <Card key={`${recipe.recipeTitle}${index}`} style={styles.cardSpacing}>
               <Card.Img style={styles.recipeImage} variant="top" src={recipe.image} />
               <Card.Body>
                 <Card.Title>{recipe.recipeTitle}</Card.Title>
@@ -123,7 +129,9 @@ export default function Homepage() {
             </Card>
           );
         })}
-      </div>
+      </div></>)}
+      
+      
     </div>
   );
 }

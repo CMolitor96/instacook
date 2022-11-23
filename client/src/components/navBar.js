@@ -1,59 +1,61 @@
 import React from 'react';
-
+import authService from "../utils/auth"
+import { Link, useLocation } from "react-router-dom"
 
 function NavBar({ currentPage, handlePageChange }) {
+  const location = useLocation()
   return (
     <div className='header-div'>
       <h1 className='header-text'>instacook</h1>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a
-            href="#login"
-            onClick={() => handlePageChange('Login')}
-            className={currentPage === 'Login' ? 'nav-link active' : 'nav-link'}
-          >Login</a>
+          <Link
+            to="/login"
+            className={location === '/login' ? 'nav-link active' : 'nav-link'}
+          >Login</Link>
         </li>
 
         <li className="nav-item">
-          <a
-            href="#signup"
-            onClick={() => handlePageChange('Signup')}
-            className={currentPage === 'Signup' ? 'nav-link active' : 'nav-link'}
-          >Signup</a>
+          <Link
+           to="/signup"
+            className={location === '/signup' ? 'nav-link active' : 'nav-link'}
+          >Signup</Link>
         </li>
 
         <li className="nav-item">
-          <a
-            href="#homepage"
-            onClick={() => handlePageChange('Homepage')}
-            className={currentPage === 'Homepage' ? 'nav-link active' : 'nav-link'}
-          >Homepage</a>
+          <Link
+            to="/homepage"
+            className={location === '/homepage' ? 'nav-link active' : 'nav-link'}
+          >Homepage</Link>
         </li>
 
         <li className="nav-item">
-          <a
-            href="#userProfile"
-            onClick={() => handlePageChange('UserProfile')}
-            className={currentPage === 'UserProfile' ? 'nav-link active' : 'nav-link'}
-          >UserProfile</a>
+          <Link
+            to="/userprofile"
+            className={location === '/userprofile' ? 'nav-link active' : 'nav-link'}
+          >UserProfile</Link>
         </li>
 
         <li className="nav-item">
-          <a
-            href="#individualRecipe"
-            onClick={() => handlePageChange('IndividualRecipe')}
-            className={currentPage === 'IndividualRecipe' ? 'nav-link active' : 'nav-link'}
-          >IndividualRecipe</a>
+          <Link
+            to="/recipe"
+            className={location === '/recipe' ? 'nav-link active' : 'nav-link'}
+          >IndividualRecipe</Link>
         </li>
 
         <li className="nav-item">
-          <a
-            href="#addRecipe"
-            onClick={() => handlePageChange('AddRecipe')}
-            className={currentPage === 'AddRecipe' ? 'nav-link active' : 'nav-link'}
-          >AddRecipe</a>
+          <Link
+            to="/addrecipe"
+            className={location === '/addrecipe' ? 'nav-link active' : 'nav-link'}
+          >AddRecipe</Link>
+        </li>
+        <li className="nav-item">
+          <button
+            onClick={() => authService.logout() }
+          >Logout</button>
         </li>
       </ul>
+      
     </div>
   );
 }
