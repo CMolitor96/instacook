@@ -1,5 +1,5 @@
 import React from 'react';
-
+import authService from "../utils/auth"
 
 function NavBar({ currentPage, handlePageChange }) {
   return (
@@ -53,7 +53,13 @@ function NavBar({ currentPage, handlePageChange }) {
             className={currentPage === 'AddRecipe' ? 'nav-link active' : 'nav-link'}
           >AddRecipe</a>
         </li>
+        <li className="nav-item">
+          <button
+            onClick={() => authService.logout() }
+          >Logout</button>
+        </li>
       </ul>
+      
     </div>
   );
 }
