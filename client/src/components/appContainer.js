@@ -23,7 +23,7 @@ export default function AppContainer() {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/homepage" element={<Homepage />} />
           <Route exact path="/userprofile" element={<UserProfile />} />
-          <Route exact path="/recipe" element={<IndividualRecipe />} />
+          <Route exact path="/recipe/:recipeId" element={<IndividualRecipe />} />
           <Route exact path="/addrecipe" element={<AddRecipe />} />
           <Route path="*" element={<Login />} />
         </Routes>
