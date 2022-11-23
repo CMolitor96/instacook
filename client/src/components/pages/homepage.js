@@ -5,6 +5,7 @@ import authService from "../../utils/auth"
 import cookies from '../Images/chocChunkCook.jpeg';
 import taco from '../Images/bestTacos.jpeg';
 import spaghetti from '../Images/spaghetti.jpeg';
+import { redirect } from 'react-router-dom';
 
 const styles = {
   page: {
@@ -88,12 +89,13 @@ export default function Homepage() {
   ]
 
   const loggedIn = authService.loggedIn()
+ if (!loggedIn) {
+  console.log('you are not logged in. redirecting...')
+  redirect("/login")};
 
-  console.log(loggedIn)
   return (
     <div style={styles.page}>
- {!authService.loggedIn() ? <p>Not logged in</p>: (<p> Welcome user, here is the home page</p>)}
-      {/* <aside style={styles.aside}>
+ {!loggedIn ? <p>Not logged in</p>: (<> <aside style={styles.aside}>
         <h3>Filter</h3>
         <ul style={styles.asideItems}>
           {categoryArray.map((item) => {
@@ -127,7 +129,8 @@ export default function Homepage() {
             </Card>
           );
         })}
-      </div> */}
+      </div></>)}
+      
       
     </div>
   );

@@ -21,7 +21,7 @@ const Login = () => {
       const { data } = await login({
         variables: { ...userData },
       });
-      if (data) redirect("/");
+      if (data) redirect("/homepage");
       Auth.login(data.login.token);
     } catch (e) {
       console.log(e);
