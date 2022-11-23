@@ -39,6 +39,7 @@ const typeDefs = gql`
         user(_id: String!): User
         me: User
         recipes: [Recipe]!
+        recipe(_id: ID!): Recipe
         recipeCategory(recipeCategory: String!): [Recipe]
     }
 
