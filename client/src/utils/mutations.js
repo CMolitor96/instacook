@@ -34,6 +34,7 @@ mutation addRecipe($recipeName: String!, $recipeCategory: String!, $recipeDescri
       recipeDescription
       recipeImages
       recipeIngredients
+      recipeInstructions
       recipeName
     }
   }
@@ -52,6 +53,14 @@ mutation addComment($recipeId: ID!, $commentText: String!) {
         commentAuthor
         _id
       }
+    }
+  }
+`;
+
+export const REMOVE_RECIPE = gql`
+mutation removeRecipe($recipeId: ID!) {
+    removeRecipe(recipeId: $recipeId) {
+      recipeName
     }
   }
 `;
