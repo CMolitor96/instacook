@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { LOGIN_USER } from '../../utils/mutations';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -22,6 +22,7 @@ const Login = () => {
       const { data } = await login({
         variables: { ...userData },
       });
+      if (data) redirect('/');
       Auth.login(data.login.token);
     } catch (e) {
       console.log(e);
