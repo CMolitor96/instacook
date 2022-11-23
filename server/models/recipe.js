@@ -31,6 +31,10 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
+    recipeInstructions: {
+        type: String,
+        required: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now,
@@ -38,8 +42,7 @@ const recipeSchema = new Schema({
     },
     recipeImages: [
         {
-            data: Buffer,
-            contentType: String,
+            type: String
         }
     ],
     comments: [

@@ -16,8 +16,9 @@ const typeDefs = gql`
         recipeDescription: String
         recipeAuthor: String
         recipeIngredients: String
+        recipeInstructions: String
         createdAt: String
-        recipeImages: String
+        recipeImages: [String]
         comments: [Comment!]!
     }
 
@@ -35,17 +36,18 @@ const typeDefs = gql`
 
     type Query {
         users: [User]!
-        user(username: String!): User
+        user(_id: String!): User
         me: User
         recipes: [Recipe]!
-        recipe(recipeName: String!): Recipe
+        recipeCategory(recipeCategory: String!): [Recipe]
     }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        addRecipe(recipeName: String!, recipeCategory: String!, recipeDescription: String!, recipeIngredients: String!, recipeImages: String): Recipe
+        addRecipe(recipeName: String!, recipeCategory: String!, recipeDescription: String!, recipeIngredients: String!, recipeInstructions: String!, recipeImages: [String]): Recipe
         addComment(recipeId: ID!, commentText: String!): Recipe
+        removeRecipe(recipeId: ID!): Recipe
     }
 `;
 
