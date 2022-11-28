@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import { ALL_RECIPES, RECIPE_CATEGORY } from '../../utils/queries';
+import { ALL_RECIPES } from '../../utils/queries';
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -104,41 +105,30 @@ export default function Homepage() {
     redirect("/login")
   };
 
-  // const Dinner = "Dinner";
-  const { filterLoading, category } = useQuery(RECIPE_CATEGORY, {
-    variables: {recipeCategory: "Dinner" },
-  });
-  
   
   const { loading, data } = useQuery(ALL_RECIPES);
   // const recipes = data?.recipes || [];
-  console.log(category);
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (filterLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div style={styles.page}>
       {!loggedIn ? <p>Not logged in</p> : (<> <aside style={styles.aside}>
         <h3>Filter</h3>
         <ul style={styles.asideItems}>
-          {/* {category.recipeCategory.map((item) => { */}
-            return (
-              <li {...category}>
-                {/* <a
-                  target='_blank'
-                  href={category.link}
-                  rel="noreferrer" key={category.id}>
-                  {category.recipeCategory}
-                </a> */}
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Breakfast`}>Breakfast</Link>
               </li>
-            );
-          {/*})}*/}
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Lunch`}>Lunch</Link>
+              </li>
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Dinner`}>Dinner</Link>
+              </li>
         </ul>
       </aside>
 

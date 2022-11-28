@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Signup from "./components/pages/signup";
 import Login from "./components/pages/login";
 import Homepage from "./components/pages/homepage";
+import Filter from "./components/pages/filter";
 import UserProfile from "./components/pages/userProfile";
 import IndividualRecipe from "./components/pages/individualRecipe";
 import AddRecipe from "./components/pages/addRecipe";
@@ -66,6 +67,7 @@ function App(){
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/homepage" element={<Homepage />} />
+            <Route exact path="/homepage/:filter" element={<Filter />} />
             <Route exact path="/userprofile" element={<UserProfile />} />
             <Route exact path="/recipe/:recipeId" element={<IndividualRecipe />} />
             <Route exact path="/addrecipe" element={<AddRecipe />} />
