@@ -1,8 +1,12 @@
 import React from 'react';
+import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import '../../styles/test.css'
+
+
+
 
 const styles = {
   titleInput: {
@@ -41,11 +45,68 @@ const styles = {
   }
 }
 
-
-
 export default function AddRecipe() {
+  const inputArr = [
+    {
+      id: 1,
+      size: "sm",
+      value: "",
+      className: "mb-3"
+    }
+  ];
+
+  const [arr, setArr] = useState(inputArr);
+
+  const addInput = () => {
+    setArr(s => {
+      return [
+        ...s,
+        {
+          size: "sm",
+          value: "",
+          className: "mb-3"
+        }
+      ];
+    });
+  };
+
+  const handleChange = e => {
+    e.preventDefault();
+
+    const index = e.target.id;
+    setArr(s => {
+      const newArr = s.slice();
+      newArr[index].value = e.target.value;
+
+      return newArr;
+    });
+  };
   return (
     <div style={styles.AddRecipeContainer}>
+      <div>
+        <button onClick={addInput}>+</button>
+        {arr.map((item, i) => {
+          return (
+            <div>
+              <InputGroup onChange={handleChange} size={item.size} className={item.className} value={item.value} id={i} style={styles.ingredientInput}>
+                <Form.Control
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                  placeholder="Type ingredient name here..."
+                />
+              </InputGroup>
+
+              <InputGroup onChange={handleChange} size={item.size} className={item.className} value={item.value} id={i} style={styles.quantInput}>
+                <Form.Control
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                  placeholder="Type ingredient quantity here..."
+                />
+              </InputGroup>
+            </div>
+          );
+        })}
+      </div>
 
       <h1 style={styles.addRecipeTitle}>Add A New Recipe</h1>
       <div style={styles.titleContainer}>
@@ -82,7 +143,26 @@ export default function AddRecipe() {
             </InputGroup>
           </div>
         </div>
+
         <Button variant="primary">+ Add Another Ingredient</Button>{' '}
+
+        <div style={styles.recipeItemInput}>
+          <h5>Recipe Image:</h5>
+          <InputGroup size="sm" className="mb-3" style={styles.quantInput}>
+            <Form.Control
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
+              placeholder="Type image link here..."
+            />
+          </InputGroup>
+
+        </div>
+        <Form.Select aria-label="Default select example">
+          <option>Select Recipe Category</option>
+          <option value="1">Breakfast</option>
+          <option value="2">Lunch</option>
+          <option value="3">Dinner</option>
+        </Form.Select>
       </div>
 
       <div style={styles.instructions}>
