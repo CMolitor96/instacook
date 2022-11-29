@@ -1,6 +1,11 @@
 import React from 'react';
+import { useQuery } from '@apollo/client';
+
+import { ALL_RECIPES } from '../../utils/queries';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+
 import authService from "../../utils/auth"
 import cookies from '../Images/chocChunkCook.jpeg';
 import taco from '../Images/bestTacos.jpeg';
@@ -39,6 +44,10 @@ const styles = {
     height: '20vh',
     objectFit: 'cover'
   },
+  cardBody: {
+    backgroundColor: '#222327',
+    color: 'white'
+  },
   cardSpacing: {
     display: 'flex',
     flexDirection: 'row',
@@ -48,7 +57,7 @@ const styles = {
 
 export default function Homepage() {
   const categoryArray = [
-    { 
+    {
       id: 1,
       category: 'Italian',
       link: 'link/italian'
@@ -89,27 +98,35 @@ export default function Homepage() {
   ]
 
   const loggedIn = authService.loggedIn()
- if (!loggedIn) {
-  console.log('you are not logged in. redirecting...')
-  redirect("/login")};
+  if (!loggedIn) {
+    console.log('you are not logged in. redirecting...')
+    redirect("/login")
+  };
+
+  
+  const { loading, data } = useQuery(ALL_RECIPES);
+  // const recipes = data?.recipes || [];
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div style={styles.page}>
- {!loggedIn ? <p>Not logged in</p>: (<> <aside style={styles.aside}>
+      {!loggedIn ? <p>Not logged in</p> : (<> <aside style={styles.aside}>
         <h3>Filter</h3>
         <ul style={styles.asideItems}>
-          {categoryArray.map((item) => {
-            return (
-              <li key={item.id}>
-                <a
-                  target='_blank'
-                  href={item.link}
-                  rel="noreferrer" key={item.id}>
-                  {item.category}
-                </a>
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Breakfast`}>Breakfast</Link>
               </li>
-            );
-          })}
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Lunch`}>Lunch</Link>
+              </li>
+              <li>
+                <Link className='btn btn-primary' to={`/homepage/Dinner`}>Dinner</Link>
+              </li>
         </ul>
       </aside>
 

@@ -1,13 +1,35 @@
 import React from 'react';
+import instacook from '../components/Images/instacook-logo.png'
 import authService from "../utils/auth"
 import { Link, useLocation } from "react-router-dom"
+
+const styles = {
+  logo: {
+    width: '15%',
+    display: 'flex',
+    margin: '1%',
+    borderRadius: '10px'
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    borderWidth: '1px',
+    borderColor: '#dee2e6',
+    borderStyle: 'solid'
+  },
+  navTabs: {
+    paddingBottom: '1%',
+    borderStyle: 'none'
+  }
+}
 
 function NavBar({ currentPage, handlePageChange }) {
   const location = useLocation()
   return (
-    <div className='header-div'>
-      <h1 className='header-text'>instacook</h1>
-      <ul className="nav nav-tabs">
+    <div style={styles.header}>
+      <img style={styles.logo} src={instacook} alt='instacook logo'/>
+      <ul style={styles.navTabs} className="nav nav-tabs">
         <li className="nav-item">
           <Link
             to="/login"
@@ -24,8 +46,8 @@ function NavBar({ currentPage, handlePageChange }) {
 
         <li className="nav-item">
           <Link
-            to="/"
-            className={location === '/' ? 'nav-link active' : 'nav-link'}
+            to="/homepage"
+            className={location === '/homepage' ? 'nav-link active' : 'nav-link'}
           >Homepage</Link>
         </li>
 

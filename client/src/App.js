@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import Signup from "./components/pages/signup";
 import Login from "./components/pages/login";
 import Homepage from "./components/pages/homepage";
+import Filter from "./components/pages/filter";
 import UserProfile from "./components/pages/userProfile";
 import IndividualRecipe from "./components/pages/individualRecipe";
 import AddRecipe from "./components/pages/addRecipe";
@@ -41,6 +42,15 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
+const styles = {
+  headerFooter: {
+    backgroundColor: '#fffbf3'
+  },
+  background: {
+    backgroundColor: '#688774'
+  }
+}
+
 function App(){
     const [currentPage, setCurrentPage] = useState("Homepage");
 
@@ -49,17 +59,22 @@ function App(){
     <ApolloProvider client={client}>
        <Router>
       <div>
-        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/" element={<Homepage />} />
-          <Route exact path="/userprofile" element={<UserProfile />} />
-          <Route exact path="/recipe/:recipeId" element={<IndividualRecipe />} />
-          <Route exact path="/addrecipe" element={<AddRecipe />} />
-          {/* <Route path="*" element={<Login />} /> */}
-        </Routes>
-        <footer>
+        <div style={styles.headerFooter}>
+          <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
+        </div>
+        <div style={styles.background}>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/homepage" element={<Homepage />} />
+            <Route exact path="/homepage/:filter" element={<Filter />} />
+            <Route exact path="/userprofile" element={<UserProfile />} />
+            <Route exact path="/recipe/:recipeId" element={<IndividualRecipe />} />
+            <Route exact path="/addrecipe" element={<AddRecipe />} />
+            <Route path="*" element={<Login />} />
+          </Routes>
+        </div>
+        <footer style={styles.headerFooter}>
           <Footer />
         </footer>
       </div>
