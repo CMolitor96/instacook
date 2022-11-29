@@ -96,7 +96,7 @@ function IndividualRecipe() {
           Submit
         </button>
       </form>
-      <div className="comment" style={styles.comment}><p>comments: {data.recipe.comments[0].commentText}</p></div>
+      {/* <div className="comment" style={styles.comment}><p>comments: {data.recipe.comments[0].commentText}</p></div> */}
     </div>
   );
 }
