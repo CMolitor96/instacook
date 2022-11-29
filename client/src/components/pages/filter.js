@@ -1,17 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { redirect, useParams } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
-
 import { RECIPE_CATEGORY } from '../../utils/queries';
-
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
 import authService from "../../utils/auth"
 
-// import cookies from '../Images/chocChunkCook.jpeg';
-// import taco from '../Images/bestTacos.jpeg';
-// import spaghetti from '../Images/spaghetti.jpeg';
-import { redirect, useParams } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+
+
 
 const styles = {
   page: {
@@ -78,7 +75,7 @@ console.log(data);
 
   return (
     <div>
-      <h1 style={styles.pageTitle}>{filter}</h1>
+      <h1 style={styles.pageTitle}>All Recipes In The {filter} Category</h1>
       {data.recipeCategory.map((recipe, index) => {
         return (
           <Card key={`${recipe.recipeTitle}${index}`} style={styles.cardSpacing}>
@@ -88,7 +85,7 @@ console.log(data);
               <Card.Text>
                 {recipe.recipeDescription}
               </Card.Text>
-              <Button variant="primary">Go To Recipe</Button>
+              <Link className="btn btn-primary" to={`/recipe/${recipe._id}`}>Go To Recipe</Link>
             </Card.Body>
           </Card>
         );
