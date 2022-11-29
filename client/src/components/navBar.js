@@ -24,8 +24,8 @@ function NavBar({ currentPage, handlePageChange }) {
 
         <li className="nav-item">
           <Link
-            to="/homepage"
-            className={location === '/homepage' ? 'nav-link active' : 'nav-link'}
+            to="/"
+            className={location === '/' ? 'nav-link active' : 'nav-link'}
           >Homepage</Link>
         </li>
 
@@ -36,12 +36,12 @@ function NavBar({ currentPage, handlePageChange }) {
           >UserProfile</Link>
         </li>
 
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <Link
             to="/recipe"
             className={location === '/recipe' ? 'nav-link active' : 'nav-link'}
           >IndividualRecipe</Link>
-        </li>
+        </li> */}
 
         <li className="nav-item">
           <Link

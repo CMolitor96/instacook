@@ -5,7 +5,7 @@ import authService from "../../utils/auth"
 import cookies from '../Images/chocChunkCook.jpeg';
 import taco from '../Images/bestTacos.jpeg';
 import spaghetti from '../Images/spaghetti.jpeg';
-import { redirect } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 const styles = {
   page: {
@@ -124,7 +124,9 @@ export default function Homepage() {
                 <Card.Text>
                   {recipe.description}
                 </Card.Text>
+                <Link to={`/recipe/${recipe.id}`}>
                 <Button variant="primary">Go To Recipe</Button>
+                </Link>
               </Card.Body>
             </Card>
           );

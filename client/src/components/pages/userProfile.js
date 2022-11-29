@@ -5,7 +5,7 @@ import { REMOVE_RECIPE } from '../../utils/mutations';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
-
+import AuthService from '../../utils/auth'
 
 const styles = {
   page: {
@@ -31,7 +31,9 @@ const styles = {
 }
 
 export default function UserProfile() {
+  console.log('loggedIn?', AuthService.loggedIn())
   const { loading, data } = useQuery(ME);
+  console.log('data', data)
   // eslint-disable-next-line
   const [removeRecipe, { error, recipeData }] = useMutation(REMOVE_RECIPE);
   const handleDelete = async (event) => {
