@@ -58,10 +58,12 @@ function IndividualRecipe() {
     variables: { id: recipeId },
     
   });
+
   if (loading) {
     return <div>Loading...</div>;
   }
   console.log(data)
+
   return (
     <div className="wrapper">
       <h1 className="title" style={styles.title}>

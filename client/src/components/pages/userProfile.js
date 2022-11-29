@@ -11,15 +11,16 @@ const styles = {
   page: {
     display: 'flex',
     flexDirection: 'row',
-    marginRight: '2vw'
+    marginRight: '2vw',
+    justifyContent: 'center'
   },
   pageTitle: {
     margin: '2%',
     textAlign: 'center',
   },
   recipeImage: {
-    width: '20vw',
-    height: '20vh',
+    width: '30vw',
+    height: '30vh',
     objectFit: 'cover'
   },
   cardSpacing: {
@@ -27,7 +28,7 @@ const styles = {
     flexDirection: 'row',
     margin: '2%',
     justifyContent: 'center'
-  }
+  },
 }
 
 export default function UserProfile() {
@@ -60,20 +61,21 @@ export default function UserProfile() {
         <h1 style={styles.pageTitle}>My Recipes</h1>
         {data.me.recipes.map((recipe) => {
           return (
-            <Card style={styles.cardSpacing} key={recipe._id}>
-              <Card.Img style={styles.recipeImage} variant="top" src={recipe.recipeImages} alt={recipe.recipeName}/>
-              <Card.Body>
-                <Card.Title>{recipe.recipeName}</Card.Title>
-                <Card.Text>
-                  {recipe.recipeDescription}
-                </Card.Text>
-                {/* <Button variant="primary">Go To Recipe</Button> */}
-                <Link className="btn btn-primary" to={`/recipe/${recipe._id}`}>Go To Recipe</Link>
-                <Card.Text>Comments: {recipe.comments.length}</Card.Text>
-                <Card.Text>Created At: {recipe.createdAt}</Card.Text>
-                <Button variant="danger" id={recipe._id} onClick={handleDelete}>Delete this Recipe</Button>
-              </Card.Body>
-            </Card>
+            <div style={styles.center}>
+              <Card style={styles.cardSpacing} key={recipe._id}>
+                <Card.Img style={styles.recipeImage} variant="top" src={recipe.recipeImages} alt={recipe.recipeName}/>
+                <Card.Body>
+                  <Card.Title>{recipe.recipeName}</Card.Title>
+                  <Card.Text>
+                    {recipe.recipeDescription}
+                  </Card.Text>
+                  <Link className="btn btn-primary" to={`/recipe/${recipe._id}`}>Go To Recipe</Link>
+                  <Card.Text>Comments: {recipe.comments.length}</Card.Text>
+                  <Card.Text>Created At: {recipe.createdAt}</Card.Text>
+                  <Button variant="danger" id={recipe._id} onClick={handleDelete}>Delete this Recipe</Button>
+                </Card.Body>
+              </Card>
+            </div>
           );
         })}
       </div>
