@@ -52,6 +52,10 @@ function IndividualRecipe() {
   });
   // console.log(data)
   // console.log(recipeId)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="wrapper">
       <h1 className="title" style={styles.title}>

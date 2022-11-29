@@ -1,18 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
+
 import { useQuery } from '@apollo/client';
-
 import { ALL_RECIPES } from '../../utils/queries';
-
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
 import authService from "../../utils/auth"
 
-// import cookies from '../Images/chocChunkCook.jpeg';
-// import taco from '../Images/bestTacos.jpeg';
-// import spaghetti from '../Images/spaghetti.jpeg';
-import { redirect } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import '../../styles/test.css'
+
 
 const styles = {
   page: {
@@ -36,7 +32,14 @@ const styles = {
     flexDirection: 'column',
     marginRight: '1vw',
     marginLeft: '0',
+    alignContent: 'space-around',
     listStyle: 'none'
+  },
+  listItems: {
+    margin: '1vh'
+  },
+  listButton: {
+    width: '10vw'
   },
   pageTitle: {
     margin: '2%'
@@ -58,46 +61,7 @@ const styles = {
 }
 
 export default function Homepage() {
-  // const categoryArray = [
-  //   {
-  //     id: 1,
-  //     category: 'Italian',
-  //     link: 'link/italian'
-  //   },
-  //   {
-  //     id: 2,
-  //     category: 'Mexican',
-  //     link: 'link/mexican'
-  //   },
-  //   {
-  //     id: 3,
-  //     category: 'Vegetarian',
-  //     link: 'link/vegetarian'
-  //   }
-  // ]
-  // const recipeArray = [
-  //   {
-  //     id: 1,
-  //     image: spaghetti,
-  //     recipeTitle: 'Spaghetti and Meatballs',
-  //     description: 'Delicious spaghetti made with traditional marinara sauce and ground beef meatballs. Everyone at the table enjoys this dish.',
-  //     link: 'spaghetti/link'
-  //   },
-  //   {
-  //     id: 2,
-  //     image: taco,
-  //     recipeTitle: 'Best Tacos',
-  //     description: 'Carne asada has a lot of flavor and topped with a generous portion of guacamole and pico de gallo in 2 corn tortillas.',
-  //     link: 'taco/link'
-  //   },
-  //   {
-  //     id: 3,
-  //     image: cookies,
-  //     recipeTitle: 'Chocolate Chunk Cookies',
-  //     description: 'Simple, straightforward, amazingly delicious, doughy yet still fully cooked, chocolate chip cookie that turns out perfectly every single time!',
-  //     link: 'cookies/link'
-  //   }
-  // ]
+
 
   const loggedIn = authService.loggedIn()
   if (!loggedIn) {
@@ -105,9 +69,8 @@ export default function Homepage() {
     redirect("/login")
   };
 
-  
   const { loading, data } = useQuery(ALL_RECIPES);
-  // const recipes = data?.recipes || [];
+
 
 
   if (loading) {
@@ -120,15 +83,15 @@ export default function Homepage() {
       {!loggedIn ? <p>Not logged in</p> : (<> <aside style={styles.aside}>
         <h3>Filter</h3>
         <ul style={styles.asideItems}>
-              <li>
-                <Link className='btn btn-primary' to={`/homepage/Breakfast`}>Breakfast</Link>
-              </li>
-              <li>
-                <Link className='btn btn-primary' to={`/homepage/Lunch`}>Lunch</Link>
-              </li>
-              <li>
-                <Link className='btn btn-primary' to={`/homepage/Dinner`}>Dinner</Link>
-              </li>
+          <li style={styles.listItems}>
+            <Link style={styles.listButton} className='btn btn-primary button' to={`/homepage/Breakfast`}>Breakfast</Link>
+          </li>
+          <li style={styles.listItems}>
+            <Link style={styles.listButton} className='btn btn-primary button' to={`/homepage/Lunch`}>Lunch</Link>
+          </li>
+          <li style={styles.listItems}>
+            <Link style={styles.listButton} className='btn btn-primary button' to={`/homepage/Dinner`}>Dinner</Link>
+          </li>
         </ul>
       </aside>
 
@@ -143,7 +106,7 @@ export default function Homepage() {
                   <Card.Text>
                     {recipe.recipeDescription}
                   </Card.Text>
-                  <Button variant="primary">Go To Recipe</Button>
+                  <Link className="btn btn-primary" to={`/recipe/${recipe._id}`}>Go To Recipe</Link>
                 </Card.Body>
               </Card>
             );
