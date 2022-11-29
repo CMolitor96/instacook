@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
 import { LOGIN_USER } from "../../utils/mutations";
-import { Link } from "react-router-dom";
-
+import {redirect } from "react-router-dom";
 const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [login, { error, data}] = useMutation(LOGIN_USER);
@@ -29,8 +28,10 @@ const Login = () => {
       email: "",
       password: "",
     });
+ 
+  if (data) redirect("/userProfile");
   };
-
+ 
   return (
     <>
       <main className="flex-row justify-center mb-4">
@@ -38,7 +39,7 @@ const Login = () => {
           <div className="card">
             <h4 className="card-header bg-dark text-light p-2">Login</h4>
             <div className="card-body">
-              {data ? <Link to="/"/>: ""}
+              {/* {data ? <Redirect to="/homepage"/>: ""} */}
               <form onSubmit={handleSubmit}>
                 <input
                   className="form-input"
@@ -47,7 +48,7 @@ const Login = () => {
                   type="email"
                   value={userData.email}
                   onChange={handleInputChange}
-                />
+                /> 
                 <input
                   className="form-input"
                   placeholder="******"
