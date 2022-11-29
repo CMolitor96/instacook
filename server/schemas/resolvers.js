@@ -87,8 +87,6 @@ const resolvers = {
                     {commentText: commentText,
                     commentAuthor: context.user.username
                     }
-                    // commentAuthor: context.user.username,
-                    //remember to remove commentAuthor from typedefs too
                 );
                 const recipe = await Recipe.findOneAndUpdate(
                     {_id: recipeId},
@@ -105,10 +103,7 @@ const resolvers = {
         removeRecipe: async (parent, {recipeId}, context) => {
             if (context.user) {
                 const recipe = await Recipe.findById(recipeId).populate('comments');
-                // console.log(recipe);
-                // console.log(recipe.comments);
                 for (let i = 0; i < recipe.comments.length; i++) {
-                    // console.log(recipe.comments[i]._id);
                     await Comment.findByIdAndDelete(recipe.comments[i]._id)
                 }
                 const deleteRecipe = await Recipe.findByIdAndDelete(recipeId);

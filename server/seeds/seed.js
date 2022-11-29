@@ -31,11 +31,5 @@ db.once('open', async () => {
     console.log("All data seeded!");
     process.exit(0);
 
-    // await Recipe.deleteMany({});
-  
-    // const recipes = await Recipe.insertMany(recipeData);
-  
-    // console.log('Recipes seeded!');
-    // process.exit(0);
 });
   

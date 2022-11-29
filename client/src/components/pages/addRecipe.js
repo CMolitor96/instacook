@@ -48,6 +48,7 @@ const styles = {
 }
 
 export default function AddRecipe() {
+  // eslint-disable-next-line
   const [createRecipe, { error }] = useMutation(ADD_RECIPE);
   const [titleState, setTitleState] = useState('');
   const handleTitleChange = function(e) {
@@ -74,19 +75,10 @@ export default function AddRecipe() {
     setImageState(e.target.value);
   };
 
-  // const inputArr = [
-  //   {
-  //     id: 1,
-  //     size: "sm",
-  //     value: "",
-  //     className: "mb-3"
-  //   }
-  // ];
-  // const token = localStorage.getItem('id_token');
   const onSubmit = async (event) => {
     event.preventDefault();
-    // console.log(titleState, descriptionState, categoryState, ingredientState, instructionState, imageState);
     try {
+      //eslint-disable-next-line
       const { data } = await createRecipe({
         variables: {
           recipeName: titleState,
@@ -109,34 +101,6 @@ export default function AddRecipe() {
     setImageState('');
   } 
 
-
-
-  // const [arr, setArr] = useState(inputArr);
-
-  // const addInput = () => {
-  //   setArr(s => {
-  //     return [
-  //       ...s,
-  //       {
-  //         size: "sm",
-  //         value: "",
-  //         className: "mb-3"
-  //       }
-  //     ];
-  //   });
-  // };
-
-  // const handleChange = e => {
-  //   e.preventDefault();
-
-  //   const index = e.target.id;
-  //   setArr(s => {
-  //     const newArr = s.slice();
-  //     newArr[index].value = e.target.value;
-
-  //     return newArr;
-  //   });
-  // };
   return (
     <div style={styles.AddRecipeContainer}>
 
@@ -166,11 +130,7 @@ export default function AddRecipe() {
           />
         </InputGroup>
       </div><br></br>
-      {/* <InputGroup className="mb-3">
-      <InputGroup.Text>First and last name</InputGroup.Text>
-      <Form.Control aria-label="First name" />
-      <Form.Control aria-label="Last name" />
-    </InputGroup> */}
+
           <div>
         <h3>Recipe Ingredients:</h3>
         <InputGroup>
@@ -185,32 +145,6 @@ export default function AddRecipe() {
       </div><br></br>
 
       <div>
-      {/* <div>
-        <Button variant="primary" onClick={addInput}>+ Add Another Ingredient</Button>
-        {arr.map((item, i) => {
-          return (
-            <div>
-              <InputGroup size={item.size} className={item.className} id={i} style={styles.ingredientInput}>
-                <Form.Control
-                  aria-label="Small"
-                  aria-describedby="inputGroup-sizing-sm"
-                  placeholder="Type ingredient name here..."
-                  value={ingredientState}
-                  onChange={handleIngredientChange}
-                />
-              </InputGroup>
-
-              <InputGroup size={item.size} className={item.className} id={i} style={styles.quantInput}>
-                <Form.Control
-                  aria-label="Small"
-                  aria-describedby="inputGroup-sizing-sm"
-                  placeholder="Type ingredient quantity here..."
-                />
-              </InputGroup>
-            </div>
-          );
-        })}
-      </div> */}
 
         
 
