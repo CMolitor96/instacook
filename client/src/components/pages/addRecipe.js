@@ -49,38 +49,13 @@ const styles = {
 
 export default function AddRecipe() {
   const [createRecipe, { error }] = useMutation(ADD_RECIPE);
-
-  const inputArr = [
-    {
-      id: 1,
-      size: "sm",
-      value: "",
-      className: "mb-3"
-    }
-  ];
-  const token = localStorage.getItem('id_token');
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    // try {
-    //   const { data } = await createRecipe({
-    //     variables: {
-    //       recipeName: "Fish",
-    //       recipeCategory: "Dinner",
-    //       recipeInstructions: "These are the steps",
-    //       recipeDescription: "This is a fish recipe",
-    //       recipeAuthor: Auth.getProfile().data.username,
-    //       recipeIngredients: "So many ingredients in this dish",
-    //       recipeImages: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/5/4/1/FNM_060112-Duff-Goldman-Spanish-Style-Grilled-Fish-recipe_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371606208411.jpeg",
-      
-    //     }
-    //   })
-    // } catch (e) {
-    //   console.log(e);
-    // }
-  } 
   const [titleState, setTitleState] = useState('');
   const handleTitleChange = function(e) {
     setTitleState(e.target.value);
+  };
+  const [descriptionState, setDescriptionState] = useState('');
+  const handleDescriptionChange = function(e) {
+    setDescriptionState(e.target.value);
   };
   const [categoryState, setCategoryState] = useState('');
   const handleCategoryChange = function(e) {
@@ -90,22 +65,66 @@ export default function AddRecipe() {
   const handleIngredientChange = function (e) {
     setingredientState(e.target.value);
   };
-
-
-  const [arr, setArr] = useState(inputArr);
-
-  const addInput = () => {
-    setArr(s => {
-      return [
-        ...s,
-        {
-          size: "sm",
-          value: "",
-          className: "mb-3"
-        }
-      ];
-    });
+  const [instructionState, setInstructionState] = useState('');
+  const handleInstructionChange = function(e) {
+    setInstructionState(e.target.value);
   };
+  const [imageState, setImageState] = useState('');
+  const handleImageChange = function(e) {
+    setImageState(e.target.value);
+  };
+
+  // const inputArr = [
+  //   {
+  //     id: 1,
+  //     size: "sm",
+  //     value: "",
+  //     className: "mb-3"
+  //   }
+  // ];
+  // const token = localStorage.getItem('id_token');
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(titleState, descriptionState, categoryState, ingredientState, instructionState, imageState);
+    try {
+      const { data } = await createRecipe({
+        variables: {
+          recipeName: titleState,
+          recipeCategory: categoryState,
+          recipeInstructions: instructionState,
+          recipeDescription: descriptionState,
+          recipeAuthor: Auth.getProfile().data.username,
+          recipeIngredients: ingredientState,
+          recipeImages: imageState,
+        }
+      })
+    } catch (e) {
+      console.log(e);
+    }
+    setTitleState('');
+    setDescriptionState('');
+    setCategoryState('');
+    setInstructionState('');
+    setingredientState('');
+    setImageState('');
+  } 
+
+
+
+  // const [arr, setArr] = useState(inputArr);
+
+  // const addInput = () => {
+  //   setArr(s => {
+  //     return [
+  //       ...s,
+  //       {
+  //         size: "sm",
+  //         value: "",
+  //         className: "mb-3"
+  //       }
+  //     ];
+  //   });
+  // };
 
   // const handleChange = e => {
   //   e.preventDefault();
@@ -142,6 +161,8 @@ export default function AddRecipe() {
             as="textarea"
             aria-label="With textarea"
             placeholder="Type recipe description here..."
+            value={descriptionState}
+            onChange={handleDescriptionChange}
           />
         </InputGroup>
       </div><br></br>
@@ -150,9 +171,21 @@ export default function AddRecipe() {
       <Form.Control aria-label="First name" />
       <Form.Control aria-label="Last name" />
     </InputGroup> */}
+          <div>
+        <h3>Recipe Ingredients:</h3>
+        <InputGroup>
+          <Form.Control
+            as="textarea"
+            aria-label="With textarea"
+            placeholder="Type recipe ingredients and quantities here..."
+            value={ingredientState}
+            onChange={handleIngredientChange}
+          />
+        </InputGroup>
+      </div><br></br>
 
       <div>
-      <div>
+      {/* <div>
         <Button variant="primary" onClick={addInput}>+ Add Another Ingredient</Button>
         {arr.map((item, i) => {
           return (
@@ -177,29 +210,31 @@ export default function AddRecipe() {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
         
 
         <div style={styles.recipeItemInput}>
-          <h5>Recipe Image:</h5>
+          <h3>Recipe Image:</h3>
           <InputGroup size="sm" className="mb-3" style={styles.quantInput}>
             <Form.Control
               aria-label="Small"
               aria-describedby="inputGroup-sizing-sm"
-              placeholder="Type image link here..."
+              placeholder="Paste image link here..."
+              value={imageState}
+              onChange={handleImageChange}
             />
           </InputGroup>
 
         </div>
+        <h3>Recipe Category:</h3>
         <Form.Select aria-label="Default select example" onChange={handleCategoryChange}>
-          <option>Select Recipe Category</option>
-          <option value="Breakfast">Breakfast</option>
-          <option value="Lunch">Lunch</option>
-          <option value="Dinner">Dinner</option>
+          <option key="Select">Select Recipe Category</option>
+          <option value="Breakfast" key="Breakfast">Breakfast</option>
+          <option value="Lunch" key="Lunch">Lunch</option>
+          <option value="Dinner" key="Dinner">Dinner</option>
         </Form.Select>
       </div>
-
       <div style={styles.instructions}>
         <h5>Recipe Instructions:</h5>
         <InputGroup>
@@ -207,6 +242,8 @@ export default function AddRecipe() {
             as="textarea"
             aria-label="With textarea"
             placeholder="Type cooking instructions here..."
+            value={instructionState}
+            onChange={handleInstructionChange}
           />
         </InputGroup>
       </div>
