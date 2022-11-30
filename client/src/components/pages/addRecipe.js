@@ -3,7 +3,6 @@ import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
-import '../../styles/test.css'
 import { ADD_RECIPE } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
@@ -40,11 +39,15 @@ const styles = {
   addRecipeTitle: {
     display: 'flex',
     justifyContent: 'center',
-    margin: '5vh 0vw 10vh 0vw'
+    paddingTop: '5vh',
+    paddingBottom: '5vh'
   },
   instructions: {
     margin: '15vh 0vw 3vh 0vw'
-  }
+  },
+  button: {
+    paddingBottom: '5vh'
+  },
 }
 
 export default function AddRecipe() {
@@ -179,10 +182,9 @@ export default function AddRecipe() {
         </InputGroup>
       </div>
 
-      <div>
+      <div style={styles.button}>
         <Button variant="primary" onClick={onSubmit}>Submit Recipe</Button>
       </div>
-
     </div>
   );
 }

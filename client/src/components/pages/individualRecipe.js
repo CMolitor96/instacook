@@ -5,19 +5,19 @@ import { useParams } from "react-router-dom";
 
 const styles = {
   title: {
-    margin: "2vh 8vw 4vh 5vw",
+    padding: "2vh 8vw 4vh 5vw",
     textAlign: "center",
   },
   image: {
-    padding: "5px",
+    paddingRight: "1vw",
     margin: "3vh 3vw 3vh 3vw",
   
     
   },
   imageStyle: {
     objectFit: "cover",
-    maxWidth: "40vw",
-    maxHeight: "40vh",
+    maxWidth: "35vw",
+    maxHeight: "35vh",
   },
 
   time: {
@@ -31,14 +31,14 @@ const styles = {
     
   },
   instructions: {
-    margin: "3vh 3vw 3vh 3vw",
     textAlign: "center",
-    height: "8vh",
-    textAlign: "center",
+    height: "fit-content",
     border: "2px solid",
     borderRadius: "5px",
-    padding: "5px",
-    width: "98vw",
+    marginLeft: "1vw",
+    marginBottom: "1vw",
+    padding: "1vw",
+    width: "97vw",
   },
   ingredients: {
     textAlign: "center",
@@ -50,7 +50,10 @@ const styles = {
     margin: "3vh 3vw"
     
   },
-  comment: {},
+  comment: {
+    paddingLeft: '1vw',
+    width: '98vw'
+  },
 };
 function IndividualRecipe() {
   const { recipeId } = useParams();
@@ -75,6 +78,7 @@ function IndividualRecipe() {
          <img style={styles.imageStyle} src={data.recipe.recipeImages}></img>
         </div>
         <div className="col-6 col-sm-4 ingredients" style={styles.ingredients}>
+          <h5>Ingredients</h5>
           <p>{data.recipe.recipeIngredients}</p>
         </div>
 
@@ -85,10 +89,11 @@ function IndividualRecipe() {
         </div>
       </div>
       <div className="row instructions" style={styles.instructions}>
+        <h5>Instructions</h5>
         <p>{data.recipe.recipeInstructions}</p>
       </div>
 
-      <form role="form">
+      <form style={styles.comment}>
         <div class="form-group">
           <textarea class="form-control" rows="3" required></textarea>
         </div>

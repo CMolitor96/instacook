@@ -55,21 +55,21 @@ function NavBar({ currentPage, handlePageChange }) {
           <Link
             to="/userprofile"
             className={location === '/userprofile' ? 'nav-link active' : 'nav-link'}
-          >UserProfile</Link>
+          >User Profile</Link>
         </li>
 
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <Link
             to="/recipe"
             className={location === '/recipe' ? 'nav-link active' : 'nav-link'}
           >IndividualRecipe</Link>
-        </li>
+        </li> */}
 
         <li className="nav-item">
           <Link
             to="/addrecipe"
             className={location === '/addrecipe' ? 'nav-link active' : 'nav-link'}
-          >AddRecipe</Link>
+          >Add Recipe</Link>
         </li>
         <li className="nav-item">
           <button
