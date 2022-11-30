@@ -1,71 +1,61 @@
-# Getting Started with Create React App
+# Instacook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+Instacook is a recipe sharing app. It features user authentication for users to save a collection of their own created/shared recipes,  as well as delete their own posts if needed. Shared recipes are public and anyone with an account can access posted recipes.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Installation Instructions:
+This project is deployed live on Heroku! Visit the site at: https://frozen-chamber-50604.herokuapp.com/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack:
+* React.js
+* JavaScript
+* HTML
+* CSS
+* React-Bootstrap
+* Node.js
+* Express.js
+* GraphQL
+* Apollo-Server
+* Mongoose
+* MongoDB
+* JWT
+* Bcrypt
+* Heroku
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Contributors:
 
-### `npm run build`
+* Kent Shaffer @ GitHub: (https://github.com/kentshaffer)
+* Charles Molitor @ GitHub: (https://github.com/CMolitor96)
+* Mario Ulloa @ GitHub: (https://github.com/Mulloa90)
+* Austin Smittle @ GitHub: (https://github.com/asmitt8373)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Questions: 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+GitHub Repository: (https://github.com/CMolitor96/instacook)
 
-### `npm run eject`
+Please email me at (charlie.molitor.38@gmail.com) for any further questions regarding this application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
+## Screenshots of app:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![screenshot of homepage](./client/src/components/Images/ic-homepage.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![screenshot of user profile page](./client/src/components/Images/ic-userprof.png)
 
-## Learn More
+![screenshot of individual recipe render page](./client/src/components/Images/ic-individual.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![screenshot of add recipe page](./client/src/components/Images/ic-addrecipe.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![screenshot of login screen](./client/src/components/Images/ic-login.png)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# instacook
+---

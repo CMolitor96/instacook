@@ -10,7 +10,7 @@ const styles = {
   },
   footerContainer: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 }
 
